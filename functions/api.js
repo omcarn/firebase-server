@@ -31,6 +31,19 @@ router.get('/hello', async (req, res) => {
   res.json({ data: snapshot.val() });
 });
 
+router.get('/saveMovie', async (req, res) => {
+  const movieName = 'Interstellar'
+const ref = db.ref('movieslist');
+
+const obj = {
+  name: movieName,
+  createdAt: Date.now(),
+}
+await ref.set(obj);
+const snapshot = await ref.once('value');
+res.json({ data: snapshot.val() });
+});
+
 // POST /api/message
 router.post('/message', async (req, res) => {
   const { message } = req.body;
