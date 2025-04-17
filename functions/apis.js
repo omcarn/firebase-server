@@ -1,4 +1,4 @@
-require('dotenv').config(); // for local testing
+//require('dotenv').config(); // for local testing
 
 const express = require('express');
 const serverless = require('serverless-http');
@@ -13,12 +13,12 @@ app.use(express.json()); // Middleware to parse JSON
 const rawServiceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 rawServiceAccount.private_key = rawServiceAccount.private_key.replace(/\\n/g, '\n');
 
-if (!admin.apps.length) {
+
   admin.initializeApp({
     credential: admin.credential.cert(rawServiceAccount),
     databaseURL: "https://nodejsapp-6a41d-default-rtdb.firebaseio.com" 
   });
-}
+
 
 const db = admin.database();
 
